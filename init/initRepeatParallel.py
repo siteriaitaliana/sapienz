@@ -32,51 +32,51 @@
 import multiprocessing as mp
 import time
 
-from devices import emulator
+# from devices import emulator
 import settings
 
 
 # global results for mp callback
 results = []
-idle_devices = []
+# idle_devices = []
 
 
 def process_results(data):
-	individual, device = data
+	individual = data
 	results.append(individual)
-	idle_devices.append(device)
+	# idle_devices.append(device)
 
 
-def initPop(container, func, n, apk_dir, package_name):
+def initPop(container, func, n):
 	"""Call the function *container* with a generator function corresponding
 	to the calling *n* times the function *func*.
 	"""
 	# init global states
 
-	if settings.DEBUG:
-		print "### Init population in parallel"
-		print "n=", n
-	ret = []
-	while len(results) > 0:
-		results.pop()
-	while len(idle_devices) > 0:
-		idle_devices.pop()
+	# if settings.DEBUG:
+	# 	print ("### Init population in parallel")
+	# 	print ("n=", n)
+	# ret = []
+	# while len(results) > 0:
+	# 	results.pop()
+	# # while len(idle_devices) > 0:
+	# # 	idle_devices.pop()
 
-	# 1. get idle devices
-	idle_devices.extend(emulator.get_devices())
+	# # 1. get idle devices
+	# # idle_devices.extend(emulator.get_devices())
 
-	# 2. aissign tasks to devices
-	pool = mp.Pool(processes=len(idle_devices))
-	for i in range(0, n):
-		while len(idle_devices) == 0:
-			time.sleep(0.1)
-		if settings.DEBUG:
-			print "### Call apply_async"
-		pool.apply_async(func, args=(idle_devices.pop(0), apk_dir, package_name), callback=process_results)
+	# # 2. aissign tasks to devices
+	# pool = mp.Pool(processes=1)
+	# for i in range(0, n):
+	# 	# while len(idle_devices) == 0:
+	# 	# 	time.sleep(0.1)
+	# 	if settings.DEBUG:
+	# 		print ("### Call apply_async")
+	# 	pool.apply_async(func, args=(i), callback=process_results)
 
-	# should wait for all processes finish
-	pool.close()
-	pool.join()
-	ret.extend(results)
+	# # should wait for all processes finish
+	# pool.close()
+	# pool.join()
+	# ret.extend(results)
 
-	return ret
+	return func()

@@ -48,7 +48,7 @@ def show_hof():
 
 	for individual in hof:
 		print type(individual)
-		print individual.fitness.values
+		print individual["fitness"]["values"]
 
 
 if __name__ == "__main__":

@@ -24,14 +24,15 @@ WORKING_DIR = '/'
 # === GA parameters ===
 SEQUENCE_LENGTH_MIN = 20
 SEQUENCE_LENGTH_MAX = 500
-SUITE_SIZE = 5
-POPULATION_SIZE = 50
-OFFSPRING_SIZE = 50
-GENERATION = 100
+SUITE_SIZE = 1
+POPULATION_SIZE = 5
+OFFSPRING_SIZE = 5
+GENERATION = 3
 # Crossover probability
-CXPB = 0.7
+CXPB = 1
 # Mutation probability
-MUTPB = 0.3
+# TODO: Fix mutation
+MUTPB = 0
 
 
 # === Only for main_multi ===
